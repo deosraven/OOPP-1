@@ -20,6 +20,8 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
             //incrémnter cnt pour chaque lettre
             ++size;
 
+            //can be replaced by map[] operator that can increment value in new key place maybe solution with increment++ (after read)
+            //frq[(*iter)]++;
             //si la lettre déjà clé de la map, ++value sinon ajouter clé avec value 1
             /*if(frq.find((*iter))){//parenthesis ?
                 ++frq[(*iter)];//increment la value de la clé
