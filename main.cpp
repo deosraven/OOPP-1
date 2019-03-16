@@ -60,7 +60,7 @@ int main(int argc, char* argv[]){
             }
             out_b << endl;
         }
-        //out_b.close(); TOTEST
+        out_b.close();
 
     }catch(std::invalid_argument&){
         cout << error_arguments << endl;

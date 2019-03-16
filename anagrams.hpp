@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <fstream>
+#include <iostream>
 
 typedef std::map<char, int> Frq_hist;
 typedef std::vector<Frq_hist> Dictionary;//vector of map (key is letter and value is letter frequency in a word) (key '#' is for stocking size of word)
