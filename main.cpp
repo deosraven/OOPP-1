@@ -35,17 +35,17 @@ int main(int argc, char* argv[]){
         //create dictionary
         const Dictionary dict = create_dictionary(dict_filename);
 
-        //output dictionary in a file for test purpose TOTEST
-        /*ofstream out_a("dict_output.txt");
+        //output dictionary in a file for test purpose
+        ofstream out_a("dict_output.txt");
         if(!out_a)
             throw std::ios_base::failure("Error: Failed to open dictionnary output file"); 
         for(auto word = dict.cbegin(); word != dict.cend(); ++word){
-            for(auto letter = word->cbegin(); letter != word->cend(); ++word){
+            for(auto letter = word->cbegin(); letter != word->cend(); ++letter){
                 out_a << "(" << letter->first << ", " << letter->second << ") ";
             }
             out_a << endl;
         }
-        out_a.close();*/
+        out_a.close();
 
         //find all uniques anagrams
         const vector<vector<string>> anag = anagrams(input_string, dict, max);

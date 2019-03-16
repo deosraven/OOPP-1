@@ -3,11 +3,11 @@
 using std::string;
 using std::vector;
 
-Frq_hist create_frq(const string word);//crée un histogramme des fréquences des lettres dans un mot
+//Frq_hist create_frq(const string word);//crée un histogramme des fréquences des lettres dans un mot
 
 //Frq_hist equal_frq(const Frq_hist& fa, const Frq_hist& fb);//compare deux histogramme de fréquence des lettres et renvoye la différence si égale renvoye null
 
-Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find then insert -> better operation ? if not still (log 26)^2 but rather ugly
+/*Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find then insert -> better operation ? if not still (log 26)^2 but rather ugly
     //créer la map vide
     Frq_hist frq;//initialisation ? pointeur ?
 
@@ -31,7 +31,7 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
     frq.insert('#', cnt);//TOTEST
 
     return frq;
-}
+}*/
 
 /*Frq_hist equal_frq(const Frq_hist& fa, const Frq_hist& fb){
 
@@ -40,12 +40,6 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
 Dictionary create_dictionary(const string& filename){
     Dictionary dict;//tmps
     (void)filename;
-
-    //tmps TOTEST
-    /*std::map map_1 {{a, 1}, {d, 10}, {w, 4}};
-    std::map map_1 {{b, 3}, {e, 5}, {c, 1}};
-    std::map map_1 {{a, 2}, {d, 10}, {z, 3}}; 
-    Dictionary dict{map_1, map_2, map_3}*/
 
     //Creer le dict vide
     //Dictionary dict;
