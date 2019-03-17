@@ -47,7 +47,7 @@ int main(int argc, char* argv[]){
         }
         out_a.close();
 
-        //find all uniques anagrams
+        //find all uniques anagrams;
         const vector<vector<string>> anag = anagrams(input_string, dict, max);
 
         //output result in exit file

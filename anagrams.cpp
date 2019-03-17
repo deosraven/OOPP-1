@@ -22,12 +22,6 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
 
             //can be replaced by map[] operator that can increment value in new key place maybe solution with increment++ (after read)
             frq[(*iter)]++;
-            //si la lettre déjà clé de la map, ++value sinon ajouter clé avec value 1
-            /*if(frq.find((*iter))){//parenthesis ?
-                ++frq[(*iter)];//increment la value de la clé
-            }else{
-                frq.insert((*iter), 1);//ajoute la clé et sa value
-            }//more efficient/elegant ? maybe with response of operation that access to a value*/
         }
     }
 
@@ -49,7 +43,7 @@ Dictionary create_dictionary(const string& filename){//retun NULL if error TO CH
     ifstream fin(filename);
     if(!fin){
         cerr << "Error: Cannot open text file";
-        //return nullptr; TO CHANGE
+        return dict;//TO TEST, OK?
     }
 
     //Parcourir le fichier ligne par ligne
@@ -67,6 +61,8 @@ anagrams(const string& input, const Dictionary& dict, unsigned max){
     (void)input;
     (void)dict;
     (void)max;
+
+    
 
     return agns;
 }
