@@ -17,11 +17,11 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
     for(auto iter = word.cbegin(); iter != word.cend(); ++iter){
         //ignorer si non lowercase
         if(islower((*iter))){
-            //incrémnter cnt pour chaque lettre
+            //incrémenter cnt pour chaque lettre
             ++size;
 
             //can be replaced by map[] operator that can increment value in new key place maybe solution with increment++ (after read)
-            //frq[(*iter)]++;
+            frq[(*iter)]++;
             //si la lettre déjà clé de la map, ++value sinon ajouter clé avec value 1
             /*if(frq.find((*iter))){//parenthesis ?
                 ++frq[(*iter)];//increment la value de la clé
@@ -49,7 +49,7 @@ Dictionary create_dictionary(const string& filename){//retun NULL if error TO CH
     ifstream fin(filename);
     if(!fin){
         cerr << "Error: Cannot open text file";
-        //return nullptr;
+        //return nullptr; TO CHANGE
     }
 
     //Parcourir le fichier ligne par ligne
