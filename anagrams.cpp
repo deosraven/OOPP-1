@@ -8,7 +8,7 @@ int compare_frq(const Frq_hist& fa, const Frq_hist& fb, Frq_hist& output);//comp
 
 Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find then insert -> better operation ? if not still (log 26)^2 but rather ugly
     //créer la map vide
-    Frq_hist frq;//initialisation ? pointeur ?
+    Frq_hist frq;
 
     //initialiser compteur de taille
     int size = 0;
@@ -22,6 +22,8 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
 
             //map[] operator increment key and create new ones
             frq.first[(*iter)]++;
+
+            frq.second.push_back((*iter));//ajout du caractère dans la string retenant le mot
         }
     }
 
@@ -31,11 +33,22 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
     return frq;
 }
 
-int compare_frq(const Frq_hist& fa, const Frq_hist& fb, Frq_hist& output){
-    (void)fa;
-    (void)fb;
-    (void)output;
-    return 0;
+int compare_frq(const Frq_hist& fa, const Frq_hist& fb, Frq_hist& output){//revoye -1 si b non compris dans a, 0 si a = b et 1 si b compris dans a.  Renvoye dans output la différence a-b si result = 0 ou 1
+    output = fa;
+    //cout << "fa: " << output.second << " fb: " << fb.second << endl;
+    if(fa.first.size() < fb.first.size() || fa.first.at('#') < fb.first.at('#'))//if b use more letters than a return a into output and 1 as result
+        return -1;
+
+    try{
+        for(auto lettre = ++fb.first.cbegin(); lettre != fb.first.cend(); ++lettre){
+            //cout << "key: " << lettre->first << " value: " << lettre->second << endl;
+            output.first.at(lettre->first) -= lettre->second;
+        }
+    }catch(std::out_of_range&){
+        return -1;
+    }
+
+    return -1;
 }
 
 Dictionary create_dictionary(const string& filename){//retun NULL if error TO CHECK
@@ -63,23 +76,27 @@ anagrams(const string& input, const Dictionary& dict, unsigned max){
     vector<vector<string>> anags;//tmps
     (void)max;
 
-    //Enregister l'input
-    Frq_hist input_frq = create_frq(input);
-
-    vector<Dictionary::const_iterator> stk;
-
+    vector<pair<Dictionary::const_iterator, Frq_hist>> stk;//conserve l'emplacement du mot et l'input calculé jusque là
     int test;
     Frq_hist diff_frq;
+    Frq_hist searched_frq;
+
+    //Enregister l'input;
+    stk.push_back({dict.cbegin(), create_frq(input)});
     //Parcourir le dico
     do{
-        for(auto word = dict.cbegin(); word != dict.cend(); ++word){
-            test = compare_frq(input_frq, (*word), diff_frq);
+        searched_frq = stk.back().second;
+        for(auto word = stk.back().first++; word != dict.cend(); ++word){
+            test = compare_frq(searched_frq, (*word), diff_frq);
             if(test == 0){//anagram complet
-                
+                //print anagram (with stack)
             }else if(test >= 1){//anagram partiel
-                stk.push_back(word);
+                stk.push_back({word, diff_frq});
+                searched_frq = diff_frq;//possible to just do that or need to implement copy
             }
         }
+        if(!stk.empty())
+            stk.pop_back();//supprime le dernier élément du stack après avoir fouillé le reste du dictionnaire*/
     }while(!stk.empty());
 
     return anags;
