@@ -4,7 +4,7 @@ using namespace std;
 
 Frq_hist create_frq(const string word);//crée un histogramme des fréquences des lettres dans un mot
 
-//Frq_hist equal_frq(const Frq_hist& fa, const Frq_hist& fb);//compare deux histogramme de fréquence des lettres et renvoye la différence si égale renvoye null
+int compare_frq(const Frq_hist& fa, const Frq_hist& fb, Frq_hist& output);//compare deux histos -1 si <0, 0 si =0, 1 si >0 false sinon avec l'histo de différence dans output
 
 Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find then insert -> better operation ? if not still (log 26)^2 but rather ugly
     //créer la map vide
@@ -20,20 +20,23 @@ Frq_hist create_frq(const string word){//TOTEST O(max_word_size) not sure find t
             //incrémenter cnt pour chaque lettre
             ++size;
 
-            //can be replaced by map[] operator that can increment value in new key place maybe solution with increment++ (after read)
-            frq[(*iter)]++;
+            //map[] operator increment key and create new ones
+            frq.first[(*iter)]++;
         }
     }
 
     //ajouter clé '#' avec value cnt
-    frq.insert({'#', size});
+    frq.first.insert({'#', size});
 
     return frq;
 }
 
-/*Frq_hist equal_frq(const Frq_hist& fa, const Frq_hist& fb){
-
-}*/
+int compare_frq(const Frq_hist& fa, const Frq_hist& fb, Frq_hist& output){
+    (void)fa;
+    (void)fb;
+    (void)output;
+    return 0;
+}
 
 Dictionary create_dictionary(const string& filename){//retun NULL if error TO CHECK
     //Creer le dict vide
@@ -57,13 +60,28 @@ Dictionary create_dictionary(const string& filename){//retun NULL if error TO CH
 
 std::vector<std::vector<string>> 
 anagrams(const string& input, const Dictionary& dict, unsigned max){
-    vector<vector<string>> agns;//tmps
-    (void)input;
-    (void)dict;
+    vector<vector<string>> anags;//tmps
     (void)max;
 
-    
+    //Enregister l'input
+    Frq_hist input_frq = create_frq(input);
 
-    return agns;
+    vector<Dictionary::const_iterator> stk;
+
+    int test;
+    Frq_hist diff_frq;
+    //Parcourir le dico
+    do{
+        for(auto word = dict.cbegin(); word != dict.cend(); ++word){
+            test = compare_frq(input_frq, (*word), diff_frq);
+            if(test == 0){//anagram complet
+                
+            }else if(test >= 1){//anagram partiel
+                stk.push_back(word);
+            }
+        }
+    }while(!stk.empty());
+
+    return anags;
 }
 

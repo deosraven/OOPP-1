@@ -40,7 +40,7 @@ int main(int argc, char* argv[]){
         if(!out_a)
             throw std::ios_base::failure("Error: Failed to open dictionnary output file"); 
         for(auto word = dict.cbegin(); word != dict.cend(); ++word){
-            for(auto letter = word->cbegin(); letter != word->cend(); ++letter){
+            for(auto letter = (*word).first.cbegin(); letter != (*word).first.cend(); ++letter){
                 out_a << "(" << letter->first << ", " << letter->second << ") ";
             }
             out_a << endl;

@@ -7,8 +7,8 @@
 #include <fstream>
 #include <iostream>
 
-typedef std::map<char, int> Frq_hist;
-typedef std::vector<Frq_hist> Dictionary;//vector of map (key is letter and value is letter frequency in a word) (key '#' is for stocking size of word)
+typedef std::pair<std::map<char, int>, std::string> Frq_hist;//pair of frenquency histogram and word
+typedef std::vector<Frq_hist> Dictionary;//vector of frequency histogram
 
 Dictionary create_dictionary(const std::string& filename);
 
